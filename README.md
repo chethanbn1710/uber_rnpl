@@ -38,7 +38,7 @@ CLIENT_PORT=8001
 uvicorn server.main:app --reload
 
 
-Server runs at: http://127.0.0.1:8000/docs
+Server runs at: http://127.0.0.1:8000
 
 Swagger API docs: http://127.0.0.1:8000/docs
 
