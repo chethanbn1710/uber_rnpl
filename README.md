@@ -3,6 +3,7 @@ Follow these steps to run the Uber RNPL Ride Request System locally:
 # 1. Clone the repository:
 
 git clone https://github.com/chethanbn1710/uber_rnpl.git
+
 cd uber_rnpl
 
 
@@ -15,6 +16,7 @@ venv\Scripts\activate
 # 3. Install dependencies:
 
 pip install --upgrade pip
+
 pip install -r requirements.txt
 
 
@@ -23,8 +25,11 @@ pip install -r requirements.txt
 Create a .env file in the project root based on .env.example:
 
 DATABASE_URL=sqlite:///./test.db
+
 SERVER_HOST=0.0.0.0
+
 SERVER_PORT=8000
+
 CLIENT_PORT=8001
 
 
