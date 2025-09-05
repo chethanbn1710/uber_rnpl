@@ -8,8 +8,9 @@ cd uber_rnpl
 
 # 2. Set up a virtual environment:
 
-python -m venv venv         # Create a virtual environment
-venv\Scripts\activate       # Activate it on Windows
+python -m venv venv  
+
+venv\Scripts\activate       
 
 # 3. Install dependencies:
 
