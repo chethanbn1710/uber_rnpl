@@ -1,105 +1,72 @@
-🚀 Getting Started: Ride Now Pay Later (RNPL) System
+Getting Started
 
-This guide walks through setting up the Ride Request System (Client + Server) locally using Python and SQLite for testing.
+Follow these steps to run the Uber RNPL Ride Request System locally:
 
-1️⃣ Clone the Repository
+Clone the repository
+
 git clone https://github.com/chethanbn1710/uber_rnpl.git
 cd uber_rnpl
 
-2️⃣ Create and Activate Virtual Environment
-python -m venv venv
-# Windows
-venv\Scripts\activate
-# Linux / macOS
-# source venv/bin/activate
 
-3️⃣ Install Dependencies
+Set up a virtual environment
+
+python -m venv venv        # Create a virtual environment
+venv\Scripts\activate      # Activate it on Windows
+# (On Mac/Linux: source venv/bin/activate)
+
+
+Install dependencies
+
+pip install --upgrade pip
 pip install -r requirements.txt
 
 
-⚠️ Note: On Windows, psycopg2-binary (PostgreSQL driver) can fail to install. For quick testing, the system uses SQLite by default.
+⚠️ If psycopg2-binary fails, version 2.9.10 works on Windows and is included in the requirements.
 
-4️⃣ Configure Environment Variables
+Configure environment variables
 
-Copy .env.example to .env:
+Create a .env file in the project root based on .env.example:
 
-copy .env.example .env
-
-
-Modify .env:
-
-DATABASE_URL=sqlite:///./test.db   # Use SQLite for testing
+DATABASE_URL=sqlite:///./test.db
 SERVER_HOST=0.0.0.0
 SERVER_PORT=8000
 CLIENT_PORT=8001
 
 
-This ensures the system runs without PostgreSQL setup.
+Start the server
 
-5️⃣ Run the Server
 uvicorn server.main:app --reload
 
 
-Server runs at: http://127.0.0.1:8000
+The server runs at: http://127.0.0.1:8000
 
-Swagger docs: http://127.0.0.1:8000/docs
+Swagger API docs available at: http://127.0.0.1:8000/docs
 
-6️⃣ Run the Client API (Optional)
+Test the API
 
-In a new terminal (same virtual environment):
+POST /ride-requests – Create a new ride request:
 
-uvicorn client.api:app --reload
+{
+  "user_id": "user123",
+  "source_location": "Downtown Mall",
+  "destination_location": "Airport Terminal 1"
+}
 
 
-Client API runs at: http://127.0.0.1:8001
-
-Submit requests via Client API instead of Server directly.
-
-7️⃣ Test Ride Requests
-
-Using curl (Server):
+Using curl:
 
 curl -X POST "http://127.0.0.1:8000/ride-requests" \
--H "Content-Type: application/json" \
--d '{
-  "user_id": "user123",
-  "source_location": "Downtown Mall",
-  "destination_location": "Airport Terminal 1"
-}'
+  -H "Content-Type: application/json" \
+  -d '{"user_id":"user123","source_location":"Downtown Mall","destination_location":"Airport Terminal 1"}'
 
 
-Using curl (Client):
-
-curl -X POST "http://127.0.0.1:8001/submit-ride-request" \
--H "Content-Type: application/json" \
--d '{
-  "user_id": "user123",
-  "source_location": "Downtown Mall",
-  "destination_location": "Airport Terminal 1"
-}'
-
-
-View all requests (Server):
+GET /ride-requests – Retrieve all ride requests:
 
 curl -X GET "http://127.0.0.1:8000/ride-requests"
 
 
-View user-specific requests (Client):
+Stop the server
 
-curl -X GET "http://127.0.0.1:8001/ride-requests/user123"
+Press CTRL + C in the terminal.
 
-8️⃣ Verify Database (SQLite)
-
-The SQLite database file test.db is created in the project root.
-
-You can inspect it with tools like DB Browser for SQLite or sqlite3 CLI:
-
-sqlite3 test.db
-sqlite> .tables
-sqlite> SELECT * FROM ride_requests;
-
-9️⃣ Notes
-
-This setup uses SQLite for ease of testing. For production or PostgreSQL, update DATABASE_URL in .env and install psycopg2-binary.
-
-Make sure your virtual environment is activated every time before running the server or client.
+✅ Now the system is ready to accept ride requests and store them in the database.
