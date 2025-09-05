@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from database import SessionLocal, engine
+from .database import SessionLocal, engine
 from database.models import Base, RideRequest
 from pydantic import BaseModel
 from typing import List, Optional
