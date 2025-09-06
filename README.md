@@ -69,4 +69,3 @@ curl -X GET "http://127.0.0.1:8000/ride-requests"
 
 Press CTRL + C in the terminal.
 
-The system is now ready to accept ride requests and store them in the database.
